@@ -66,6 +66,10 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 
+  config.mock_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+
   config.before(:each) do |example|
     Sunspot.session = Sunspot::Rails::StubSessionProxy.new(Sunspot.session) unless
       example.metadata[:solr] || Sunspot.session.respond_to?(:original_session)
